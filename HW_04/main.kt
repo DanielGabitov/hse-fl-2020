@@ -222,10 +222,10 @@ fun main() {
     if (symbol == '\n'){
       line++
       colon = 0
-    } else if (Regex("[a-z]|-|:|;|,|(|)").containsMatchIn(symbol.toString())){
-      i++;
+    } else if (symbol == ' ') {
       colon++
-    } else {
+    } else if (Regex("[a-z]|-|:|;|,|(|)").containsMatchIn(symbol.toString()) && symbol != ' '){
+      i++
       colon++
     }
   }
