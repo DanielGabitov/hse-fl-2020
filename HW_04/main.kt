@@ -179,8 +179,8 @@ fun parse(data: String): Pair<Boolean, Int>{
 }
 
 
-fun main() {
-  val file_name = readLine()
+fun main(args: Array<String>) {
+  val file_name = args[0]
   val file_data = File(file_name).readText()
   var data = file_data
   var array = arrayOf<String>()
