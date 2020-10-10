@@ -1,0 +1,30 @@
+f.
+f :- g.
+f :- g, h; t.
+f :- g, (h; t).
+f a :- g, h (t c d).
+f (cons h t) :- g h, f t.
+f :- (f; f) , a.
+f :- (a ; b) , ((b (a b)); a).
+f :- ((((b)))).
+f :- a b c ; a.
+f :- a (b c) ; a.
+f :- a, b, c, d
+,
+e
+,d
+f.
+a (a b) c :- a, b, c, d ; d.
+z:-(hello a) ; (hello) , a.
+HSE :- NEVER _S_L_E_E_P_S.
+CaPsIsOn :- abracadabra ; cadabra , dabra.
+
+(f).
+f ().
+f :- (b.
+f :- (b)).
+f ((f f) f).
+f ((f) (f)).
+z :- ((a) b), b, c, d.
+(z) a.
+z:-(hello a) ; (hello) a.
