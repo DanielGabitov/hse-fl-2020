@@ -1,5 +1,7 @@
 import java.io.File
 import java.lang.Math.max
+import kotlin.Pair
+import kotlin.text.Regex
 
 var best = - 1;
 
@@ -177,8 +179,9 @@ fun parse(data: String): Pair<Boolean, Int>{
 }
 
 
-fun main() {
-  val file_data = File("test.txt").readText()
+fun main(args: Array<String>) {
+  val file_name = args[0]
+  val file_data = File(file_name).readText()
   var data = file_data
   var array = arrayOf<String>()
   while (data.length != 0){
