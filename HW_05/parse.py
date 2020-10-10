@@ -11,53 +11,56 @@ def p_error(p):
     flag = False
 
 def p_expression_full(p):
-    'expression : sitem EQ dis DOT'
+    'expression : sitem EQ exp DOT'
     p[0] = ('expression', p[1], ':-', p[3], '.')
 
 def p_expression_small(p):
     'expression : sitem DOT'
     p[0] = ('expression', p[1], '.')
 
-def p_sitem_item(p):
-    'sitem : ID item'
-    p[0] = ('sitem', p[1], p[2])
+def p_exp_plus(p):
+    'exp : m PLUS exp'
+    p[0] = ('exp', p[1], ';', p[3])
+
+def p_exp_m(p):
+    'exp : m'
+    p[0] = ('exp', p[1])
+
+def p_m_pa(p):
+    'm : pa'
+    p[0] = ('m', p[1])
+
+def p_m_mult(p):
+    'm : pa MULT m'
+    p[0] = ('m', p[1], ',', p[3])
+
+def p_pa_sitem(p):
+    'pa : sitem'
+    p[0] = ('pa', p[1])
+
+def p_pa_expbr(p):
+    'pa : LBR exp RBR'
+    p[0] = ('pa', '(', p[2], ')')
 
 def p_sitem_id(p):
     'sitem : ID'
     p[0] = ('sitem', p[1])
 
-def p_item_brplusitem(p):
-    'item : LBR ID item RBR item'
-    p[0] = ('item', '(', p[2], p[3],')', p[5])
+def p_sitem_item(p):
+    'sitem : ID item'
+    p[0] = ('sitem', p[1], p[2])
 
-def p_item_br(p):
+def p_item_big(p):
+    'item : LBR ID item RBR item'
+    p[0] = ('item', '(', p[2], p[3], ')', p[5])
+
+def p_item_small(p):
     'item : LBR ID item RBR'
     p[0] = ('item', '(', p[2], p[3], ')')
-
-def p_sitem_dis(p):
-    'item : LBR dis RBR'
-    p[0] = ('item', '(', p[2], ')')
 
 def p_item_sitem(p):
     'item : sitem'
     p[0] = ('item', p[1])
-
-def p_dis_plus(p):
-    'dis : con PLUS dis'
-    p[0] = ('dis', p[1], ';', p[3])
-
-def p_dis_con(p):
-    'dis : con'
-    p[0] = ('dis', p[1])
-
-def p_con_mult(p):
-    'con : item MULT con'
-    p[0] = ('con', p[1], ',', p[3])
-
-def p_con_item(p):
-    'con : item'
-    p[0] = ('con', p[1])
-
 
 
 parser = yacc.yacc()
