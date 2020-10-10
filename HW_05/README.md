@@ -1,2 +1,2 @@
-### Сборка:
-  bash: python3 parse.py $file_name
+###Сборка:
+  *python3 parse.py $file_name
