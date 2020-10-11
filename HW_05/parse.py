@@ -51,12 +51,12 @@ def p_sitem_item(p):
     p[0] = ('sitem', p[1], p[2])
 
 def p_item_big(p):
-    'item : LBR ID sitem RBR item'
-    p[0] = ('item', '(', p[2], p[3], ')', p[5])
+    'item : LBR sitem RBR item'
+    p[0] = ('item', '(', p[2],')', p[4])
 
 def p_item_small(p):
-    'item : LBR ID sitem RBR'
-    p[0] = ('item', '(', p[2], p[3], ')')
+    'item : LBR sitem RBR'
+    p[0] = ('item', '(', p[2], ')')
 
 def p_item_sitem(p):
     'item : sitem'
