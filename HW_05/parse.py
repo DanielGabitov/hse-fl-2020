@@ -67,8 +67,9 @@ parser = yacc.yacc()
 
 def main():
     global flag
-    f = open("test.txt")
-    output_name = ("test.txt").split('.')
+    name = sys.argv[1]
+    f = open(name)
+    output_name = (name).split('.')
     f_out = open(output_name[0] + ".out", 'w')
     s = str(f.read())
     i = 0
