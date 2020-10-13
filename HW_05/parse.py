@@ -11,11 +11,11 @@ def p_error(p):
     flag = False
 
 def p_expression_full(p):
-    'expression : sitem EQ exp DOT'
+    'expression : atom1 EQ exp DOT'
     p[0] = ('expression', p[1], ':-', p[3], '.')
 
 def p_expression_small(p):
-    'expression : sitem DOT'
+    'expression : atom1 DOT'
     p[0] = ('expression', p[1], '.')
 
 def p_exp_plus(p):
@@ -26,41 +26,53 @@ def p_exp_m(p):
     'exp : m'
     p[0] = ('exp', p[1])
 
-def p_m_pa(p):
-    'm : pa'
-    p[0] = ('m', p[1])
-
 def p_m_mult(p):
     'm : pa MULT m'
     p[0] = ('m', p[1], ',', p[3])
 
-def p_pa_sitem(p):
-    'pa : sitem'
+def p_m_pa(p):
+    'm : pa'
+    p[0] = ('m', p[1])
+
+def p_pa_atom1(p):
+    'pa : atom1'
     p[0] = ('pa', p[1])
 
 def p_pa_expbr(p):
     'pa : LBR exp RBR'
     p[0] = ('pa', '(', p[2], ')')
 
-def p_sitem_id(p):
-    'sitem : ID'
-    p[0] = ('sitem', p[1])
+def p_atom1_id(p):
+    'atom1 : ID'
+    p[0] = ('atom1', p[1])
 
-def p_sitem_item(p):
-    'sitem : ID item'
-    p[0] = ('sitem', p[1], p[2])
+def p_atom1_atom2(p):
+    'atom1 : ID atom2'
+    p[0] = ('atom1', p[1], p[2])
 
-def p_item_big(p):
-    'item : LBR item RBR item'
-    p[0] = ('item', '(', p[2],')', p[4])
+def p_atom2_big(p):
+    'atom2 : LBR atom1 RBR atom2'
+    p[0] = ('atom2', '(', p[2], ')', p[4])
 
-def p_item_small(p):
-    'item : LBR item RBR'
-    p[0] = ('item', '(', p[2], ')')
+def p_atom2_small(p):
+    'atom2 : LBR atom1 RBR'
+    p[0] = ('atom2', '(', p[2], ')')
 
-def p_item_sitem(p):
-    'item : sitem'
-    p[0] = ('item', p[1])
+def p_atom2_atom3(p):
+    'atom2 : LBR LBR atom3 RBR RBR'
+    p[0] = ('atom2', '((', p[3], '))')
+
+def p_atom2_atom1(p):
+    'atom2 : atom1'
+    p[0] = ('atom2', p[1]) 
+
+def p_atom3_idbr(p):
+    'atom3 : LBR atom3 RBR'
+    p[0] = ('atom3', '(', p[2], ')')
+
+def p_atom3_id(p):
+    'atom3 : ID'
+    p[0] = ('atom3', p[1])
 
 
 parser = yacc.yacc()
