@@ -51,11 +51,11 @@ def p_sitem_item(p):
     p[0] = ('sitem', p[1], p[2])
 
 def p_item_big(p):
-    'item : LBR sitem RBR item'
+    'item : LBR item RBR item'
     p[0] = ('item', '(', p[2],')', p[4])
 
 def p_item_small(p):
-    'item : LBR sitem RBR'
+    'item : LBR item RBR'
     p[0] = ('item', '(', p[2], ')')
 
 def p_item_sitem(p):
@@ -67,27 +67,34 @@ parser = yacc.yacc()
 
 def main():
     global flag
-    name = sys.argv[1]
+    name = sys.argv[1] 
     f = open(name)
     output_name = (name).split('.')
-    f_out = open(output_name[0] + ".out", 'w')
+    f_out = open(output_name[0] + '.out', 'w')
     s = str(f.read())
     i = 0
     while (i < len(s)):
-        line = ""
+        line = ''
         while i < len(s) and s[i] != '.':
             line += s[i]
             i += 1 
-        if i < len(s):
+        if i < len(s) and s[i] == '.':
             line += '.'
+            i += 1
+        if not line.strip(' \n\t'):
+            break
         flag = True
-        result = parser.parse(line)
-        if not flag:
+        try:
+            result = parser.parse(line)
+            if not flag:
+                f_out.write("Syntax Error!" + '\n')
+            else:
+                f_out.write(str(result) + '\n')
+            flag = True
+            i += 1
+        except IOError as exception:
             f_out.write("Syntax Error!" + '\n')
-        else:
-            f_out.write(str(result) + '\n')
-        flag = True
-        i += 1
+
 
 if __name__ == "__main__":
     main()
