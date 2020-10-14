@@ -176,7 +176,8 @@ def parse(data):
     return parse_word(word)
 
 def main():
-    name = sys.argv[1]
+    # name = sys.argv[1]
+    name = 'test.txt'
     f = open(name)
     data = str(f.read())
 
@@ -201,6 +202,7 @@ def main():
             if not parse(word) == 'Flag':
                 print(str(parse(word)))
                 return
+            word.clear()
 
     if len(word) > 0:
         if not parse(word) == 'Flag':
