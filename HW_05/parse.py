@@ -75,7 +75,7 @@ parser = yacc.yacc()
 
 def main():
     global flag
-    name = 'tes.txt' 
+    name = sys.argv[1] 
     f = open(name)
     output_name = (name).split('.')
     f_out = open(output_name[0] + '.out', 'w')
