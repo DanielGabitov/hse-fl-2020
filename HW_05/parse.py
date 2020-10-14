@@ -75,7 +75,7 @@ parser = yacc.yacc()
 
 def main():
     global flag
-    name = sys.argv[1] 
+    name = 'tes.txt' 
     f = open(name)
     output_name = (name).split('.')
     f_out = open(output_name[0] + '.out', 'w')
@@ -88,7 +88,6 @@ def main():
             i += 1 
         if i < len(s) and s[i] == '.':
             line += '.'
-            i += 1
         if not line.strip(' \n\t'):
             break
         flag = True
