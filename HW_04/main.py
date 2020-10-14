@@ -39,7 +39,7 @@ def check_length(data, cur):
     return False
 
 def parse_type(data, cur, type_):
-    if check_if_illegal_character(data, cur) or not check_length(data, cur):
+    if not check_length(data, cur) or check_if_illegal_character(data, cur):
         return [cur, False] 
 
     if data[cur][0].type == type_:
@@ -158,8 +158,10 @@ def parse_word(data):
         iterator = 0
         if not data[iterator][1]:
             return get_error_line(data[iterator][0])
-        while data[iterator][1]:
+        while check_length(data, iterator) and data[iterator][1]:
             iterator += 1
+        if iterator == len(data):
+            iterator -= 1
         return get_error_line(data[iterator][0])
 
 def get_error_line(data):
@@ -174,9 +176,7 @@ def parse(data):
     return parse_word(word)
 
 def main():
-    # name = sys.argv[1]
-    # !!!!!!!!!!!!!!!! DONT FORGET!!!!!!!!!!!!!!!!!!! 
-    name = 'test.txt'
+    name = sys.argv[1]
     f = open(name)
     output_name = (name).split('.')
     f_out = open(output_name[0] + '.out', 'w')
