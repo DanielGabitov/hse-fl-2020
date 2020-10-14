@@ -10,7 +10,7 @@ tokens = [
     'EQ'
 ]
 
-t_ID      = r'[A-Za-z_0-9]+'
+t_ID      = r'[A-Za-z_][A-Za-z_0-9]*'
 t_PLUS    = r'\;'
 t_MULT    = r'\,'
 t_DOT     = r'\.'
