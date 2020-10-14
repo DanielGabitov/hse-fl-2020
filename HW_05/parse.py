@@ -51,16 +51,12 @@ def p_atom1_atom2(p):
     p[0] = ('atom1', p[1], p[2])
 
 def p_atom2_big(p):
-    'atom2 : LBR atom1 RBR atom2'
+    'atom2 : LBR atom3 RBR atom2'
     p[0] = ('atom2', '(', p[2], ')', p[4])
 
 def p_atom2_small(p):
-    'atom2 : LBR atom1 RBR'
+    'atom2 : LBR atom3 RBR'
     p[0] = ('atom2', '(', p[2], ')')
-
-def p_atom2_atom3(p):
-    'atom2 : LBR LBR atom3 RBR RBR'
-    p[0] = ('atom2', '((', p[3], '))')
 
 def p_atom2_atom1(p):
     'atom2 : atom1'
