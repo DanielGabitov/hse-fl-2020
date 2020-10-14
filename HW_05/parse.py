@@ -71,7 +71,7 @@ def p_atom3_idbr(p):
     p[0] = ('atom3', '(', p[2], ')')
 
 def p_atom3_id(p):
-    'atom3 : ID'
+    'atom3 : atom1'
     p[0] = ('atom3', p[1])
 
 
