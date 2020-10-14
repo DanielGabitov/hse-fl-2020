@@ -178,8 +178,6 @@ def parse(data):
 def main():
     name = sys.argv[1]
     f = open(name)
-    output_name = (name).split('.')
-    f_out = open(output_name[0] + '.out', 'w')
     data = str(f.read())
 
     lexer.input(data)
@@ -201,14 +199,14 @@ def main():
             continue
         elif elem.type == 'DOT':
             if not parse(word) == 'Flag':
-                f_out.write(str(parse(word)))
+                print(str(parse(word)))
                 return
 
     if len(word) > 0:
         if not parse(word) == 'Flag':
-            f_out.write(str(parse(word)))
+            print(str(parse(word)))
             return
-    f_out.write('Correct data!')
+    print('Correct data!')
 
 if __name__ == "__main__":
     lexer = lex.lex()
