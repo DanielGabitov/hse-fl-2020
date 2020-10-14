@@ -153,7 +153,7 @@ def parse_expression(data, cur):
 
 def parse_word(data):
     if parse_expression(data, 0)[1]:
-        return "Correct Syntax!"
+        return "Flag"
     else:
         iterator = 0
         if not data[iterator][1]:
@@ -200,11 +200,15 @@ def main():
         if isinstance(elem, str):
             continue
         elif elem.type == 'DOT':
-            f_out.write(str(parse(word) + '\n'))
-            word.clear()
+            if not parse(word) == 'Flag':
+                f_out.write(str(parse(word)))
+                return
 
-    if word:
-        f_out.write(str(parse(word)) + '\n')
+    if len(word) > 0:
+        if not parse(word) == 'Flag':
+            f_out.write(str(parse(word)))
+            return
+    f_out.write('Correct data!')
 
 if __name__ == "__main__":
     lexer = lex.lex()
