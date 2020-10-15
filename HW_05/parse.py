@@ -75,7 +75,8 @@ parser = yacc.yacc()
 
 def main():
     global flag
-    name = sys.argv[1] 
+    name = sys.argv[1]
+    # name = 'tes.txt'
     f = open(name)
     output_name = (name).split('.')
     f_out = open(output_name[0] + '.out', 'w')
@@ -99,8 +100,9 @@ def main():
                 f_out.write(str(result) + '\n')
             flag = True
             i += 1
-        except IOError as exception:
+        except IOError:
             f_out.write("Syntax Error!" + '\n')
+            i+=1
 
 
 if __name__ == "__main__":
